@@ -6,10 +6,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>画板</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
+    <div id="canvas"></div>
+    <script>
+        canvas.onclick = (e) => {
+            console.log(e.clientX)
+            console.log(e.clientY)
+            // console.log 调试大法
+            let div = document.createElement('div') //在文档里创建元素div
+            div.style.position = 'absolute' //让div绝对定位
+            div.style.left = e.clientX + 'px' //让div获取点击的x坐标参数
+            div.style.top = e.clientY + 'px' //让div获取点击的y坐标参数
+            // div.style.border = '1px solid red' //设置div边框属性
+            div.style.width = '6px' //设置div宽度
+            div.style.height = '6px' //设置div高度
+            div.style.marginLeft = '-3px' //让div出现在鼠标点击的正中间
+            div.style.marginTop = '-3px' //让div出现在鼠标点击的正中间
+            div.style.borderRadius = '50%' //让div变成圆形
+            div.style.backgroundColor = 'black' //让div变成实心黑色
+            canvas.appendChild(div) //此处canvas是元素，在canvas内增加新元素div
+        }
+    </script>
 </body>
 
 </html>
