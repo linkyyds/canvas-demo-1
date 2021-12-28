@@ -18,34 +18,53 @@
         canvas.width = document.documentElement.clientWidth //获取屏幕宽度给文档，让canvas和文档宽度一致
         canvas.height = document.documentElement.clientHeight //获取屏幕高度给文档，让canvas和文档高度一致
         let ctx = canvas.getContext("2d")
-
         let painting = false //painting正在画的意思，建一个变量 默认false
-
-        canvas.onmousedown = () => { //鼠标按住
-            painting = true
-        }
-
+        ctx.strokeStyle = 'none'; //去除样式
         ctx.fillStyle = "skyblue"; //fillStyle 填充样式
         // ctx.fillRect(10, 20, 75, 80); //fillRect 矩形，填充一个矩形。对应：横坐标，纵坐标，右拉伸，下拉伸
 
-        canvas.onmousemove = (e) => { //移动鼠标
-            if (painting === true) {
-                // ctx.fillRect(e.clientX - 5, e.clientY - 5, 10, 10); //矩形
-                ctx.beginPath();
-                ctx.arc(e.clientX, e.clientY, 10, 0, 2 * Math.PI); //0,2 * Math.PI的意思是0到2π，正好是360度。对应：x轴位置、y轴位置、半径、角度
-                ctx.stroke();
-                ctx.fill();
-            } else {
-                console.log('什么都不做')
-            }
-
+        function drawLine(x1, y1, x2, y2) {//这个函数的意思就是，我收取4个参数，然后你传4个参数给我，我把这4个参数一一对应放到这4个位置
+            ctx.beginPath();
+            ctx.moveTo(x1, y1); //端点位置
+            ctx.lineTo(x2, y2); //第二个点位置
+            // ctx.lineTo(0, 500); //第三个点位置
+            ctx.closePath(); //闭合节点
+            ctx.stroke(); //描边，stroke是描边，fill是填充
         }
-
-        canvas.onmouseup = () => { //鼠标松开
-            painting = false
-        }
+        drawLine(0, 0, 500, 500)
 
 
+        var isTouchDevice = 'ontouchstart' in
+            document.documentElement;
+        console.log(isTouchDevice) //将结果输出到控制台
+        //上面1/2行，用于检测当前浏览器是否支持触摸控制
+        // if (isTouchDevice) {
+        //     canvas.ontouchmove = (e) => { //触摸移动
+        //         let x = e.touches[0].clientX
+        //         let y = e.touches[0].clientY
+        //         ctx.beginPath();
+        //         ctx.arc(x, y, 10, 0, 2 * Math.PI); //0,2 * Math.PI的意思是0到2π，正好是360度。对应：x轴位置、y轴位置、半径、角度
+        //         ctx.stroke();
+        //         ctx.fill();
+        //     }
+        // } else {
+        //     canvas.onmousedown = () => { //鼠标按住
+        //         painting = true
+        //     }
+
+        //     canvas.onmousemove = (e) => { //移动鼠标
+        //         if (painting === true) {
+        //             // ctx.fillRect(e.clientX - 5, e.clientY - 5, 10, 10); //矩形
+        //             ctx.beginPath();
+        //             ctx.arc(e.clientX, e.clientY, 10, 0, 2 * Math.PI); //0,2 * Math.PI的意思是0到2π，正好是360度。对应：x轴位置、y轴位置、半径、角度
+        //             ctx.stroke();
+        //             ctx.fill();
+        //         }
+        //     }
+        //     canvas.onmouseup = () => { //鼠标松开
+        //         painting = false
+        //     }
+        // }
         // console.log(document.body.clientWidth)//console调试大法，测试获取屏幕宽
 
     </script>
